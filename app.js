@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const app = express();
 const pageRoute = require('./routes/pageRoute')
 const courseRoute = require('./routes/courseRoute')
+const categoryRoute = require('./routes/categoryRoute');
+const userRoute = require('./routes/userRoute')
 
 mongoose.connect('mongodb://localhost/smartedu-db',{
   // useNewUrlParser: true,
@@ -24,6 +26,8 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 //Routes
 app.use('/', pageRoute);
 app.use('/courses', courseRoute);
+app.use('/categories', categoryRoute);
+app.use('/users', userRoute);
 
 
 const port = 3000;
