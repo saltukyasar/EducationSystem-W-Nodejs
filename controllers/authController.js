@@ -24,11 +24,11 @@ exports.loginUser =  (req, res) => {
      User.findOne({email}, (err, user)=>{
       if(user){
         bcrypt.compare(password, user.password, (err, same)=>{
-          if(same){
+          
             // user session
             req.session.userID = user._id;
             res.status(200).redirect('/users/dashboard');
-          }
+          
         })
       }
     })
