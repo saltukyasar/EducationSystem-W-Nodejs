@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const dotenv = require("dotenv");
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
@@ -10,9 +11,11 @@ const courseRoute = require('./routes/courseRoute')
 const categoryRoute = require('./routes/categoryRoute');
 const userRoute = require('./routes/userRoute')
 
-mongoose.connect('mongodb://localhost/smartedu-db',{
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true,
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URL,{
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
   // useFindAndModify: false,
   // useCreateIndex: true
 }).then(()=>{
@@ -58,7 +61,7 @@ app.use('/categories', categoryRoute);
 app.use('/users', userRoute);
 
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`app started on port ${port}`);
 });
